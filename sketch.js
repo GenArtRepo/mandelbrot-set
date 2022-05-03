@@ -31,7 +31,8 @@
 * 
 */
 
-
+let c1;
+let c2;
 
 
 let settings = { 
@@ -64,14 +65,17 @@ function setup(){
 
 function init(){
     background(0);
-    colors = {};
-    if(!settings.gray_scale) colors[settings.max_iterations] = {r:0, g:0, b:0}
+
+    c1 = color(0, 0, 139);
+    c2 = color(255, 255, 255);
+    
+    
     loadPixels();
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) { 
             n =  maldelbrot(i, j);
-            color = getColor(n);
-            setPixels(i, j, color);
+            n_color = getColor(n);
+            setPixels(i, j, n_color.levels);
         }
     }
     updatePixels();
@@ -115,29 +119,25 @@ function maldelbrot(i, j){
 }
 
 function getColor(n){
-    var area = n;
 
+    var factor = map(n, 0, settings.max_iterations, 0, 1);
     if(settings.gray_scale){
-        var bright = map(n, 0, settings.max_iterations, 0, 1);
-        bright = map(sqrt(bright), 0, 1, 0, 255);
-        color = {r:bright, g:bright, b:bright};
+        bright = map(sqrt(factor), 0, 1, 0, 255);
+        n_color = color(bright, bright, bright);
     } 
     else{
-        if (area in colors) color = colors[area];
-        else{ 
-            color = {r:random(0,255), g:random(0,255), b:random(0,255)};
-            colors[area] = color;
-        }    
+        if(n==settings.max_iterations) n_color = color(0, 0, 0);
+        else n_color = lerpColor(c1, c2, factor);
     }
 
-    return color;
+    return n_color;
 }
 
 function setPixels(i, j, color){
     var pixel = 4*(i + j*width);
-    pixels[pixel] = color.r;
-    pixels[pixel+1] = color.g;
-    pixels[pixel+2] = color.b;
+    pixels[pixel] = color[0];
+    pixels[pixel+1] = color[1];
+    pixels[pixel+2] = color[2];
     pixels[pixel+3] = 255;
 }
 
