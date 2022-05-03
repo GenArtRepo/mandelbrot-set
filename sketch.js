@@ -21,10 +21,13 @@
 *                     Z2 = (a^2 – b^2) +i*(2*a*b) + c		a+b>x?
 *                     Z3 = …..
 * 
-* The mandelbrot function continues being applied until it reaches the infinity 
-* value, depending on the number of iterations required to reach the infinity 
-* value (x) is selected the area for which the pixel belongs. For this 
-* implementation, the infinity value is set to 16. 
+* For some complex numbers (Z), the Mandelbrot function is bounded, and it converges
+* after several iterations, this set of numbers is the Mandelbrot set. Then, we can
+* choose a value to measure the level of convergence for each Z value, this number 
+* is called the infinity value. The Mandelbrot function is applied until it reaches 
+* the infinity value, then the number of iterations required to reach the infinity 
+* value (x) determines the area to which the pixel belongs. For this implementation, 
+* the infinity value is set to 16.
 * 
 */
 
@@ -97,7 +100,7 @@ function maldelbrot(i, j){
         // The process continues until it reachs the infinity value set as 16.
         // The area that points belong depends on how fast it reachs the infinity
         // value 
-        if (abs(a + b) > 16){
+        if (abs(a) + abs(b) > 16){
             break;
         }
         n++;
