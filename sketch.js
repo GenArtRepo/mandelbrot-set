@@ -37,7 +37,7 @@
 let settings = { 
     Generate: function(){ init(); },
     max_iterations: 100,
-    infinity_value: 2,
+    infinity_value: 16,
     gray_scale: false,
     
 }
