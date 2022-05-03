@@ -32,10 +32,14 @@
 */
 
 
+
+
 let settings = { 
     Generate: function(){ init(); },
     max_iterations: 100,
+    infinity_value: 2,
     gray_scale: false,
+    
 }
 
 function gui(){
@@ -43,7 +47,8 @@ function gui(){
     var gui = new dat.GUI();
     gui.width = 150;
     gui.add(settings,'Generate');
-    gui.add(settings,'max_iterations', 10, 1000).step(1);
+    gui.add(settings,'max_iterations', 10, 200).step(1);
+    gui.add(settings,'infinity_value', 1, 100).step(1);
     gui.add(settings,'gray_scale');
 }
 
@@ -100,7 +105,7 @@ function maldelbrot(i, j){
         // The process continues until it reachs the infinity value set as 16.
         // The area that points belong depends on how fast it reachs the infinity
         // value 
-        if (abs(a) + abs(b) > 2){
+        if (abs(a) + abs(b) > settings.infinity_value){
             break;
         }
         n++;
