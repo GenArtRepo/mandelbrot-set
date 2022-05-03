@@ -17,8 +17,8 @@
 * the point in complex form. For instance, if we are in the pixel (a, b)
 * 					
 *                     Z0 = 0    c = a + i*b
-*                     Z1 = a + i*b                          a+b>x?
-*                     Z2 = (a^2 – b^2) +i*(2*a*b) + c		a+b>x?
+*                     Z1 = a + i*b                          
+*                     Z2 = (a^2 – b^2) +i*(2*a*b) + c		
 *                     Z3 = …..
 * 
 * For some complex numbers (Z), the Mandelbrot function is bounded, and it converges
