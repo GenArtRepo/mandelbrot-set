@@ -109,7 +109,7 @@ function maldelbrot(i, j){
         // The process continues until it reachs the infinity value set as 16.
         // The area that points belong depends on how fast it reachs the infinity
         // value 
-        if (dist(a*a, b*b, 0, 0) > settings.infinity_value){
+        if (dist(a, b, 0, 0) > settings.infinity_value){
             break;
         }
         n++;
