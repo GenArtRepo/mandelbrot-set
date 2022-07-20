@@ -1,10 +1,12 @@
 /*
 ** Mandelbrot Set
 * Cristian Rojas Cardenas, April 2022
-* Algorithm based on the tutorial of Daniel Shiffman.
+* Algorithm based on the tutorial by Daniel Shiffman.
 * See the video here: 
 * https://www.youtube.com/watch?v=6z7GQewK-Ks
 * 
+* The Mandelbrot Set is the set of complex numbers for which the Mandelbrot function 
+* (z = z^2 + c) does not diverge into infinity when iterated from z = 0. 
 * The algorithm operates under a grid of complex numbers, the width representing
 * the real axis and the height the imaginary axis. The algorithm loops over the 
 * points in the grid to operate the next function:
