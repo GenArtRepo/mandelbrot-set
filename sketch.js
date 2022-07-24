@@ -127,7 +127,7 @@ function getColor(n){
     } 
     else{
         if(n==settings.max_iterations) n_color = color(0, 0, 0);
-        else n_color = lerpColor(c1, c2, factor);
+        else n_color = lerpColor(c2, c1, 1/(8**factor));
     }
 
     return n_color;
