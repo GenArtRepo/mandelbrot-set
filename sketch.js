@@ -35,6 +35,9 @@
 
 let c1;
 let c2;
+let c3;
+let c4;
+let c5;
 
 
 let settings = { 
@@ -68,8 +71,11 @@ function setup(){
 function init(){
     background(0);
 
-    c1 = color(0, 0, 139);
-    c2 = color(255, 255, 255);
+    c1 = color(0, 7, 100);
+    c2 = color(32, 107, 203);
+    c3 = color(237, 255, 255);
+    c4 = color(255, 170, 0);
+    c5 = color(0, 2, 0);
     
     
     loadPixels();
@@ -120,16 +126,45 @@ function maldelbrot(i, j){
     return n
 }
 
+function calculateColor(c1, c2, factor, min, max){
+    // Apply a cubic interpolation between 2 colors
+    var new_factor = map(factor, min, max, 0, 1);
+    return lerpColor(c1, c2, Math.pow(new_factor, 3));
+}
+
+function getUltraFractalColor(factor){
+    if(factor <=0.16){
+        return calculateColor(c1, c2, factor, 0, 0.16);
+    }else{
+        if(factor <=0.42){
+            return calculateColor(c2, c3, factor, 0.16, 0.42);
+        }else{
+            if(factor <=0.6425){
+                return calculateColor(c3, c4, factor, 0.42, 0.6425);
+            }else{
+                if(factor <=0.8575){
+                    return calculateColor(c4, c5, factor, 0.6425, 0.8575);
+                }else{
+                    return calculateColor(c5, c1, factor, 0.8575, 1);
+                }
+            }
+        }
+    }
+}
+
+function getGrayScaleColor(factor){
+    bright = map(sqrt(factor), 0, 1, 0, 255);
+    return color(bright, bright, bright);
+}
+
 function getColor(n){
 
     var factor = map(n, 0, settings.max_iterations, 0, 1);
     if(settings.gray_scale){
-        bright = map(sqrt(factor), 0, 1, 0, 255);
-        n_color = color(bright, bright, bright);
+        n_color = getGrayScaleColor(factor);
     } 
     else{
-        if(n==settings.max_iterations) n_color = color(0, 0, 0);
-        else n_color = lerpColor(c1, c2, factor);
+        n_color = getUltraFractalColor(factor);
     }
 
     return n_color;
